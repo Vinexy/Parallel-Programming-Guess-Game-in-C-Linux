@@ -25,7 +25,7 @@ Use and create multiple processes and threads inside a process and gain some exp
 5.	Score of the winning threads will be increased 
 6.	Game will end after 5 guesses.
 
-## Part a
+## PART A
 
 ```C++
 #include <stdio.h>
@@ -261,4 +261,66 @@ int main()
     pthread_exit(NULL);
     return 0;
 }
+```
+
+## Example
+
+- gcc guess_process.c -o guess_process
+- ./guess_process
+```
+The game has launched
+Computer choses [56, 1, 33, 90, 77] randomly
+Child process is created
+The game starts
+
+
+Turn 1, Parent guess: 41, Child guess: 20
+Parent win, Score: 1 – 0, 41 is closer to 56 than 20
+
+
+Turn 2, Parent guess: 52, Child guess: 45
+Child win, Score: 1 – 1, 45 is closer to 1 than 52
+
+
+Turn 5, Parent guess: 3, Child guess: 9
+Child win, Score: 2 – 3, 9 is closer to 77 than 3
+
+
+Child has won the game with score: 2 – 3 .
+
+
+Child has terminated
+Parent waits child with wait()
+Parent has terminated
+
+
+```
+- gcc guess_thread.c -o guess_thread –lpthread
+- ./guess_thread
+```
+The game has launched
+Computer choses [6, 99, 13, 49, 87] randomly
+3 threads will be created 
+The game starts
+
+
+Turn 1, Guesses: 1.thread: 11, 2.thread: 66, 3.thread: 80,
+1.thread win, Score: 1 – 0 - 0, 11 is closest to 6
+
+
+Turn 5, Guesses: 1.thread: 9, 2.thread: 56, 3.thread: 13,
+2.thread win, Score: 1 – 2 - 2, 56 is closest to 87
+
+
+2.Thread and 3.Thread won the game with score: Score: 1 – 2 – 2.
+
+
+Guesses made by threads: [2_66, 1_11, 3_80, …, 3_13, 1_9, 2_56]
+
+
+1.Thread terminated
+2.Thread terminated
+3.Thread terminated
+Threads are joined by main process
+Game finished
 ```
